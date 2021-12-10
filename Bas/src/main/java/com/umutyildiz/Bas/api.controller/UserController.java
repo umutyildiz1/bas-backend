@@ -4,6 +4,7 @@ import com.umutyildiz.Bas.business.abstracts.UserService;
 import com.umutyildiz.Bas.core.utilities.ResponseMessage;
 import com.umutyildiz.Bas.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("createUser")
-    public ResponseMessage createUser(@RequestBody User user){
+    public ResponseEntity<?> createUser(@RequestBody User user){
         user.setImageUrl("qwee");//silinecek
         return userService.createUser(user);
 
