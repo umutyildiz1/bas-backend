@@ -6,5 +6,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
     User getUserById(int id);
-    ResponseEntity<?> createUser(User user);
+    ResponseMessage createUser(User user);
 }
