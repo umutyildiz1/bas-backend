@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Base64;
 
 @Service
-public class AuthImpl implements AuthService {
+public class AuthServiceImpl implements AuthService {
 
     @Autowired
     UserDao userDao;
@@ -34,7 +34,6 @@ public class AuthImpl implements AuthService {
             ApiError apiError = new ApiError(401,"Unauthorized Request","/api/auth/");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiError);
         }
-        System.out.println(authUser.toString());
         return ResponseEntity.ok().build();
     }
 }

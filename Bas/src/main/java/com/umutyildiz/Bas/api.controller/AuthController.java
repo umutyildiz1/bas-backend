@@ -17,7 +17,6 @@ public class AuthController {
 
     @PostMapping("handle")
     public ResponseEntity<?> handleAuth(@RequestHeader(name="Authorization" , required = false) String token){
-        System.out.println(token);
         return authService.handleAuth(token);
     }
 
