@@ -1,11 +1,13 @@
 package com.umutyildiz.Bas.core.utilities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.Map;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)//null olmayanları döner
 public class ApiError {
     private int status;
 
