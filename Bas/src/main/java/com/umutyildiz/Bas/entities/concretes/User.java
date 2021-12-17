@@ -26,17 +26,15 @@ public class User implements UserDetails {
     @Column(name="user_id")
     private int userId;
 
-    @NotBlank
     @Column(name="user_name")
     @Size(min = 2,max = 50)
     private String userName;
 
-    @NotBlank
     @Column(name="surname")
     @Size(min = 2,max = 50)
     private String userSurname;
 
-    @NotBlank
+
     @UniqueEmail
     @Email
     @Column(name="email",unique = true)
@@ -46,7 +44,7 @@ public class User implements UserDetails {
     @NotBlank
     @Column(name="user_password")
     @Size(min = 2,max = 50)
-    @JsonIgnore
+
     private String userPassword;
 
     //Notnull gelecek
@@ -54,11 +52,12 @@ public class User implements UserDetails {
     @Size(min = 2,max = 500) // max num değiştirebilir hem database hem backend
     private  String imageUrl;
 
-    @NotBlank
+
     @UniquePhoneNumber
     @Column(name="phone_number")
-    @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan oluşmalıdır!")
     @Size(min = 11,max = 11,message = "Boyut 11 karakterli olmalıdır!")
+    @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan ve 11 karakterden oluşmalıdır!")
+
     private String userPhoneNumber;
 
     @Override
