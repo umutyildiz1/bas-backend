@@ -28,7 +28,7 @@ public class User implements UserDetails {
 
     @Column(name="user_name")
     @Size(min = 2,max = 50)
-    private String userName;
+    private String userFName;
 
     @Column(name="surname")
     @Size(min = 2,max = 50)
