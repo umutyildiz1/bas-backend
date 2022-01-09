@@ -1,6 +1,7 @@
 package com.umutyildiz.Bas.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.umutyildiz.Bas.core.customAnnotations.UniqueEmail;
 import com.umutyildiz.Bas.core.customAnnotations.UniquePhoneNumber;
 import lombok.AllArgsConstructor;
@@ -14,12 +15,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name="users")
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitiliazer","handler","ratedList","raterList","bidList","auctionList","favoriteAuctions","userFavorites",
+        "favoritedList"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,8 +61,28 @@ public class User implements UserDetails {
     @Column(name="phone_number")
     @Size(min = 11,max = 11,message = "Boyut 11 karakterli olmalıdır!")
     @Pattern(regexp="(^$|[0-9]{11})",message = "Telefon numarası sayılardan ve 11 karakterden oluşmalıdır!")
-
     private String userPhoneNumber;
+
+    @OneToMany(mappedBy = "id.ratedUser")
+    private List<Rating> ratedList;
+
+    @OneToMany(mappedBy = "id.raterUser")
+    private List<Rating> raterList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Bid> bidList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Auction> auctionList;
+
+    @OneToMany(mappedBy = "favoriteAuctionId.user")
+    private List<FavoriteAuction> favoriteAuctions;
+
+    @OneToMany(mappedBy = "favoriteUserId.user")
+    private List<FavoriteUser> userFavorites;
+
+    @OneToMany(mappedBy = "favoriteUserId.favoritedUser")
+    private List<FavoriteUser> favoritedList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
