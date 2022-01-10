@@ -40,12 +40,16 @@ public class Auction {
     @JsonFormat(shape=JsonFormat.Shape.OBJECT, pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp startingDate;*///Boray hocaya sor
 
+
+    @Column(name = "is_activated")
+    private Boolean isActivated = false;
+
     @Size(min=1,max=10)
     @NotBlank
     @Column(name = "starting_price")
     private double startingPrice;
 
-    //eğer time ile başlatmak zor olursa isStarted ekle kullanıcı manuel olarak başlatabilir.
+
 
     @OneToMany(mappedBy = "auction")
     private List<Bid> bidList;
